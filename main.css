@@ -2,16 +2,50 @@ body {
   font-family: "Helvetica";
   text-align: center;
   padding: 50px 20px 0;
-  background: #f4f4f7;
+  background-color: #f4f3f0;
   color: #444;
   margin: 0;
+  padding: 0;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
+
 h1 {
   font-size: 65px;
   line-height: 1.2em;
-  border-bottom: #CCC solid 1px;
   padding: 20px 0;
 }
-h3 {
-  font-weight: 300;
+
+header {
+  position: relative;
+  height: 6em;
+  width: 100%;
+}
+
+header .header-background {
+  position: absolute;
+  opacity: 0.6;
+  height: 100%;
+  width: 100%;
+  background: #CCC url("/assets/header.jpg") no-repeat right center;
+  z-index: -1;
+}
+
+header .header-logo {
+  position: absolute;
+  bottom: 5px;
+  left: 20px;
+}
+
+main {
+  flex: 1;
+  background-image: url("/assets/bg.png");
+  overflow: auto;
+}
+
+footer {
+  color: #999;
+  background-color: #404040;
+  padding: 1em;
 }

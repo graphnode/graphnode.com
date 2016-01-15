@@ -18,8 +18,10 @@
   },
   "homepage": "https://www.graphnode.com/",
   "devDependencies": {
-    "ejs": "^2.3.4",
-    "less": "^2.5.3",
+    "chokidar": "^1.4.2",
+    "jade": "^1.11.0",
+    "live-server": "^0.9.0",
+    "node-sass": "^3.4.2",
     "shelljs": "^0.5.3"
   }
 }
