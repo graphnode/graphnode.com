@@ -1,10 +1,15 @@
 extends ./_layout.jade
 
 block title
-    title Hello World | Graphnode
+    title Personal Projects | Graphnode
 
 block content
-    h1 Hello World
-    
-block footer
-    span This site was generated using node.js
+    ul.items: each project in projects
+        li.item(style='background-image:url(' + project.image + ')'): .text
+            .title #{project.name}
+            .description #{project.description}
+            ul.links: each link in project.links
+                li.link: a(href=link.url, target='_blank')
+                    if link.icon
+                        i(class="fa fa-" + link.icon)
+                    = link.name

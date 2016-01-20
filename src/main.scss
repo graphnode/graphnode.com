@@ -1,5 +1,19 @@
+@mixin stroke($color, $size: 1px) {
+    text-shadow: (-$size) (-$size) 0 $color, ($size) (-$size) 0 $color, (-$size) ($size) 0 $color, ($size) ($size) 0 $color;
+}
+
+@mixin shadow($hlen: 10px, $vlen: 10px, $spread: 5px, $blur: 0, $color: rgba(0,0,0,0.75)) {
+    -webkit-box-shadow: $hlen $vlen $spread $blur $color;
+    -moz-box-shadow: $hlen $vlen $spread $blur $color;
+    box-shadow: $hlen $vlen $spread $blur $color;
+}
+
+* {
+    box-sizing: border-box;
+}
+
 body {
-    font-family: "Helvetica";
+    font-family: 'Roboto', sans-serif;
     text-align: center;
     padding: 50px 20px 0;
     background-color: #f4f3f0;
@@ -9,12 +23,21 @@ body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
+    
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
 }
 
-h1 {
-    font-size: 65px;
-    line-height: 1.2em;
-    padding: 20px 0;
+a {
+    text-decoration: none;
+    font-weight: 500;
+    color: #444;
+    padding: 2px 4px;
+}
+
+a:hover {
+    background-color: #444;
+    color: #f4f3f0;
 }
 
 header {
@@ -22,18 +45,42 @@ header {
     height: 6em;
     width: 100%;
     
+    border-bottom: 1px solid #444;
+    
+    overflow: hidden;
+    
     .header-background {
         position: absolute;
         opacity: 0.6;
         height: 100%; width: 100%;
-        background: #CCC url('/assets/header.jpg') no-repeat right center;
+        background: #000 url('/assets/header.jpg') no-repeat right center;
         z-index: -1;
     }
-    
+        
     .header-logo {
+        display: inline-block;
         position: absolute;
         bottom: 5px;
         left: 20px;
+        
+        font-size: 42px;
+        line-height: 1.2em;
+        padding: 20px 0;
+        
+        color: #fff;
+        
+        @include stroke(#444, 2px);
+        
+        margin: 0; padding: 0;
+        
+        background-image: url("assets/logo.png"),none;
+        
+        min-width: 233px;
+        min-height: 58px;
+        
+        background-position: top left;
+        background-repeat: no-repeat;
+        text-indent: -9999px;
     }
 }
 
@@ -41,10 +88,116 @@ main {
     flex: 1;
     background-image: url('/assets/bg.png');
     overflow: auto;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    
+    padding: 2em;
+       
+    overflow: hidden;
+
+    .items {
+        margin: 0;
+        padding: 0;
+        
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+        align-items: center;
+        max-width: 1024px;
+        
+        .item {
+            position: relative;
+            background-size: cover;
+            background-position: center left;
+            background-repeat: no-repeat;
+            
+            margin: 1em; padding: 0;
+            list-style: none;
+
+            width: 24em;
+            height: 10em;
+            
+            max-width: 80%;
+            
+            border: 1px outset #999;
+            background: #fff;
+            
+            @include shadow(8px, 8px, 20px, -5px, rgba(0,0,0,0.5));
+        
+            .text {
+                position: absolute;
+                top: 0; right: 0;
+                bottom: 0;
+                width: 65%;
+                padding: 1em;
+                background-color: rgba(244, 243, 240, 0.85);
+                
+                display: flex;
+                flex-flow: column nowrap;
+                
+                .title {
+                    font-weight: 600;
+                    text-align: left;
+                }
+                
+                .description {
+                    flex: 1;
+                    margin: 0.5em 0;
+                    text-align: left;
+                }
+                
+                .links {
+                    margin: 0; padding: 0;
+                    i {
+                        margin-right: 0.25em;
+                    }
+                    
+                    .link {
+                        margin: 0; padding: 0;
+                        list-style: none;
+                        display: inline-block;
+                        
+                        &:after {
+                            content: '|';
+                            margin: 0 2px 0 5px;
+                        }
+                        
+                        &:last-child:after {
+                            content: '';
+                        }
+                    }
+                    
+                }
+            }
+        }
+    }
 }
 
 footer {
-    color: #999;
+    color: #AAA;
     background-color: #404040;
-    padding: 1em;
+    font-size: 0.9em;
+
+    border-top: 1px solid #444;
+
+    a {
+        color: #AAA;
+    }
+    
+    .span-container {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-around;
+        align-items: center;
+        
+        margin: 0 auto;
+        
+        max-width: 1024px;
+        
+        span {
+            margin: 0.5em 1em;
+        }
+    }
 }

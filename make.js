@@ -8,7 +8,15 @@ var path = require('path'),
     chokidar = require('chokidar'),
     server = require('live-server');
 
-var ignoredFiles = ['node_modules', 'make.js', 'CNAME', 'package.json', 'src', 'typings'];
+var dontServeFiles = ['node_modules', 'make.js', 'CNAME', 'package.json', 'src', 'typings'];
+var dontCleanFiles = ['node_modules', 'make.js', 'CNAME', 'package.json', 'src', 'typings', 'assets', 'data']
+
+function merge(obj1, obj2) {
+    var result = {};
+    for(var key in obj1) result[key] = obj1[key];
+    for(var key in obj2) result[key] = obj2[key];
+    return result;
+}
 
 target.all = function() {
     console.log('target all');
@@ -22,7 +30,7 @@ target.clean = function() {
     console.log('target clean');
     
     ls('./').filter(function (file) {
-        return ignoredFiles.indexOf(file) === -1 || file === 'assets';
+        return dontCleanFiles.indexOf(file) === -1;
     }).forEach(function (file) {
         rm('-rf', file);
     });
@@ -30,11 +38,13 @@ target.clean = function() {
 
 var compileHtml = function(file) {
     var processFile = function(file) {
-        var newFilename = path.basename(file, '.jade') + ".html";
+        var newFilename = path.basename(file, '.jade') + '.html';
         var newPath = path.dirname(file);
         
+        var locals = JSON.parse(cat('../data/' + path.basename(file, '.jade') + '.json') || '{}')
+        
         mkdir('-p', path.join(__dirname, newPath));
-        jade.renderFile(file, { filename: file, pretty: '\t' }).to(path.join(__dirname, newPath, newFilename));
+        jade.renderFile(file, merge(locals, { filename: file, pretty: '\t' })).to(path.join(__dirname, newPath, newFilename));
     };
     
     if (file === undefined) {
@@ -82,7 +92,7 @@ target.config = function() {
     console.log('target config');
     
     cd(__dirname);
-    ('exclude: [' + ignoredFiles.join(', ') + ']').to('_config.yml');
+    ('exclude: [' + dontServeFiles.join(', ') + ']').to('_config.yml');
 };
 
 target.watch = function() {
@@ -94,12 +104,24 @@ target.watch = function() {
     chokidar.watch(
         path.resolve(__dirname, 'src/**/*.jade'), 
         { ignoreInitial: true }
-    ).on('all', (event, path) => compileHtml());
+    ).on('all', (event, path) => { 
+        try {
+            compileHtml()
+        } catch(e) {
+            console.error('Error during html compile: ', e);
+        }
+    });
     
     chokidar.watch(
         path.resolve(__dirname, 'src/**/*.scss'), 
         { ignoreInitial: true }
-    ).on('all', (event, path) => compileCSS());
+    ).on('all', (event, path) => { 
+        try {
+            compileCSS()
+        } catch(e) {
+            console.error('Error during css compile: ', e);
+        }
+    });
     
     server.start({
         root: __dirname,

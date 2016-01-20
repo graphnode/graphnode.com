@@ -4,15 +4,21 @@ html
         block title
             title Graphnode
         link(rel="stylesheet" href="/assets/normalize.css")
+        link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700italic,700,900italic,900&subset=latin,latin-ext")
+        link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css")
         link(rel="stylesheet" href="/main.css")
+        
     body
         header
             .header-background
-            img.header-logo(src="/assets/logo.png")
+            a(href="/"): h1.header-logo Graphnode
             
         main
             block content
             
         footer
-            block footer
-                span Empty Footer
+            .span-container
+                span “Now I am become dev, the coder of worlds.” 
+                span 
+                    a(href='mailto:dgomes@graphnode.com') dgomes@graphnode.com
+                span Last Updated: #{(new Date()).toLocaleDateString()}
