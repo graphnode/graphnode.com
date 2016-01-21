@@ -35,6 +35,15 @@
             ]
         },
         { 
+            "name": "ImgTagger",
+            "image": "assets/imgtagger.png",
+            "description": "Simple and old application in .NET to organize and tag images.",
+            "links": [
+                { "name": "Source", "icon": "github", "url": "https://github.com/graphnode/imgtagger/" },
+                { "name": "Download", "icon": "download", "url": "https://github.com/graphnode/imgtagger/releases/download/1.7.0/ImgTagger.1.7.0.zip" }
+            ]
+        },
+        { 
             "name": "Development Log Layout",
             "image": "assets/devlog.png",
             "description": "Experimental layout for a design log based on a Lost Garden's idea.",
