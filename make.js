@@ -44,7 +44,7 @@ var compileHtml = function(file) {
         var locals = JSON.parse(cat('../data/' + path.basename(file, '.jade') + '.json') || '{}')
         
         mkdir('-p', path.join(__dirname, newPath));
-        jade.renderFile(file, merge(locals, { filename: file, pretty: '\t' })).to(path.join(__dirname, newPath, newFilename));
+        jade.renderFile(file, merge(locals, { filename: file, pretty: false })).to(path.join(__dirname, newPath, newFilename));
     };
     
     if (file === undefined) {
@@ -69,7 +69,7 @@ var compileCSS = function(file) {
         var newPath = path.dirname(file);
         
         mkdir('-p', path.join(__dirname, newPath));
-        sass.renderSync({ file: __dirname + '/src/' + file, outputStyle: 'expanded' }).css.toString().to(path.join(__dirname, newPath, newFilename));
+        sass.renderSync({ file: __dirname + '/src/' + file, outputStyle: 'compressed' }).css.toString().to(path.join(__dirname, newPath, newFilename));
     };
     
     if (file === undefined) {
