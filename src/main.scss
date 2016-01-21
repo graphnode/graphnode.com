@@ -45,39 +45,43 @@ a:hover {
 }
 
 header {
+    position: relative;
+    
     flex-shrink: 0;
     
-    position: relative;
     height: 6em;
     width: 100%;
     
     border-bottom: 1px solid #444;
     
     overflow: hidden;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
     
-    .header-background {
+    &::after {
+        content: "";
         position: absolute;
         opacity: 0.6;
+        top: 0; left: 0;
         height: 100%; width: 100%;
         background: #000 url('assets/header.jpg') no-repeat right center;
         z-index: -1;
     }
-        
+
     .header-logo {
         display: inline-block;
-        position: absolute;
-        bottom: 5px;
-        left: 20px;
         
         font-size: 42px;
         line-height: 1.2em;
-        padding: 20px 0;
         
         color: #fff;
         
         @include stroke(#444, 2px);
         
-        margin: 0; padding: 0;
+        margin: 0 0 0.1em 0.5em; 
+        padding: 0;
         
         background-image: url("assets/logo.png"),none;
         
@@ -115,28 +119,28 @@ main {
         max-width: 1024px;
         
         .item {
-            position: relative;
+            background-color: #fff;
             background-size: cover;
-            background-position: center left;
+            background-position: top left;
             background-repeat: no-repeat;
             
             margin: 1em; padding: 0;
             list-style: none;
 
             width: 24em;
-            height: 10em;
-            
             max-width: 80%;
             
+            height: 10em;
+
             border: 1px outset #999;
-            background: #fff;
+
+            display: flex;
+            justify-content: flex-end;
+            align-items: stretch;
             
             @include shadow(8px, 8px, 20px, -5px, rgba(0,0,0,0.5));
         
             .text {
-                position: absolute;
-                top: 0; right: 0;
-                bottom: 0;
                 width: 65%;
                 padding: 1em;
                 background-color: rgba(244, 243, 240, 0.85);
@@ -145,17 +149,19 @@ main {
                 flex-flow: column nowrap;
                 
                 .title {
+                    flex-shrink: 0;
                     font-weight: 600;
                     text-align: left;
                 }
                 
                 .description {
-                    flex: 1;
+                    flex: 1 0 auto;
                     margin: 0.5em 0;
                     text-align: left;
                 }
                 
                 .links {
+                    flex-shrink: 0;
                     margin: 0; padding: 0;
                     i {
                         margin-right: 0.25em;
@@ -168,7 +174,7 @@ main {
                         
                         &:after {
                             content: '|';
-                            margin: 0 2px 0 5px;
+                            margin: 0 5px 0 5px;
                         }
                         
                         &:last-child:after {
