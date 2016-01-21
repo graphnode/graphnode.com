@@ -9,7 +9,7 @@ var path = require('path'),
     server = require('live-server');
 
 var dontServeFiles = ['node_modules', 'make.js', 'CNAME', 'package.json', 'src', 'typings'];
-var dontCleanFiles = ['node_modules', 'make.js', 'CNAME', 'package.json', 'src', 'typings', 'assets', 'data']
+var dontCleanFiles = ['node_modules', 'make.js', 'CNAME', 'package.json', 'src', 'typings', 'favicon.ico', 'assets', 'data']
 
 function merge(obj1, obj2) {
     var result = {};

@@ -1,13 +1,14 @@
 doctype html
 html
     head
+        meta(charset="utf-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1")
+        
         block title
             title Graphnode
-        link(rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css")
-        link(rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500,700")
-        link(rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css")
-        link(rel="stylesheet" href="main.css")
-        
+            
+        link#gn-css(rel="stylesheet", href="main.css")
+          
     body
         header
             .header-background
@@ -22,3 +23,11 @@ html
                 span 
                     a(href='mailto:dgomes@graphnode.com') dgomes@graphnode.com
                 span Last Updated: #{(new Date()).toLocaleDateString()}
+        script.
+            var cb = function() {
+                var t = document.getElementById('gn-css'); 
+                ["//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css", "//fonts.googleapis.com/css?family=Roboto:400,500,700", "//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"]
+                .forEach(function(u) { var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = u; t.parentNode.insertBefore(l, t); });
+            };
+            var raf = requestAnimationFrame || mozRequestAnimationFrame || webkitRequestAnimationFrame || msRequestAnimationFrame;
+            if (raf) raf(cb); else window.addEventListener('load', cb);
