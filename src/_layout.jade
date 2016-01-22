@@ -7,8 +7,8 @@ html
         block title
             title Graphnode
             
-        link#gn-css(rel="stylesheet", href="main.css")
-          
+        style.
+            body { display: none; }
     body
         header
             h1.header-logo Graphnode
@@ -23,15 +23,14 @@ html
                     a(href='mailto:dgomes@graphnode.com') dgomes@graphnode.com
                 span Last Updated: #{(new Date()).toLocaleDateString()}
         script.
-            var t = document.getElementById('gn-css'); 
+            var t = document.getElementsByTagName('head')[0]; 
             var cb = function() {
-                ["//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css", "//fonts.googleapis.com/css?family=Roboto:400,500,700", "//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css"]
-                .forEach(function(u) { var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = u; t.parentNode.insertBefore(l, t); });
+                ["//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css", "//fonts.googleapis.com/css?family=Roboto:400,500,700", "//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css", "main.css"]
+                .forEach(function(u) { var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = u; t.appendChild(l); });
             };
             var raf = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
             if (raf) raf(cb); else window.addEventListener('load', cb);
-            var _umb = { require: { ie: 10 } };
+            var _umb = { require: { chrome: 45, safari: 7, edge: 11, firefox: 40, ie: 10, opera: 31 }, nonCritical: false };
             (function(u) {
-                var s = document.createElement('script'); s.async = true; s.src = u;
-                t.parentNode.insertBefore(s, t);
+                var s = document.createElement('script'); s.async = true; s.src = u; t.appendChild(s);
             })('//updatemybrowser.org/umb.js');

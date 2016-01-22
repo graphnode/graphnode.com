@@ -178,7 +178,7 @@ main {
                         }
                         
                         &:last-child:after {
-                            content: '';
+                            content: none;
                         }
                     }
                     
@@ -214,6 +214,26 @@ footer {
         span {
             display: inline-block;
             margin: 0.5em 1em;
+        }
+    }
+}
+
+@media screen and (max-width: 840px) {
+    body {
+        font-size: 1.2em;
+    }
+    
+    main .items .item { 
+        max-width: 70%;
+        
+        .text .links .link {
+            display: block;
+            margin: 1.5em 0;
+            
+            &:after {
+                content: none;
+                margin: 0;
+            }
         }
     }
 }
