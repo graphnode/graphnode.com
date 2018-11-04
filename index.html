@@ -1,11 +1,192 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Personal Projects | Graphnode</title><style>body { display: none; }</style></head><body><header><h1 class="header-logo">Graphnode</h1></header><main><ul class="items"><li style="background-image:url(assets/code.png)" class="item"><div class="text"><div class="title">SB &amp; SF DeWormer</div><div class="description">User script that allows the user to hide threads based on keywords.</div><ul class="links"><li class="link"><a href="https://github.com/graphnode/dewormer/" target="_blank"><i class="fa fa-github"></i>Source</a></li><li class="link"><a href="https://github.com/graphnode/dewormer/releases/download/1.0/dewormer.user.js" target="_blank"><i class="fa fa-download"></i>Download</a></li></ul></div></li><li style="background-image:url(assets/sphere-fragments.png)" class="item"><div class="text"><div class="title">Sphere Fragments</div><div class="description">Pretty webgl experiment in Unity.</div><ul class="links"><li class="link"><a href="https://github.com/graphnode/SphereFragments/" target="_blank"><i class="fa fa-github"></i>Source</a></li><li class="link"><a href="https://graphnode.com/SphereFragments/" target="_blank"><i class="fa fa-external-link"></i>View</a></li></ul></div></li><li style="background-image:url(assets/tvi-lili.png)" class="item"><div class="text"><div class="title">TVI Lili</div><div class="description">Console application that scraps videos from the portuguese TVI website.</div><ul class="links"><li class="link"><a href="https://github.com/graphnode/tvi-lili/" target="_blank"><i class="fa fa-github"></i>Source</a></li></ul></div></li><li style="background-image:url(assets/gmail-extractor.png)" class="item"><div class="text"><div class="title">Gmail Extractor</div><div class="description">Console application that extracts emails from your gmail account when Google Takeout is not available.</div><ul class="links"><li class="link"><a href="https://github.com/graphnode/gmail-extractor/" target="_blank"><i class="fa fa-github"></i>Source</a></li></ul></div></li><li style="background-image:url(assets/imgtagger.png)" class="item"><div class="text"><div class="title">ImgTagger</div><div class="description">Simple and old application in .NET to organize and tag images.</div><ul class="links"><li class="link"><a href="https://github.com/graphnode/imgtagger/" target="_blank"><i class="fa fa-github"></i>Source</a></li><li class="link"><a href="https://github.com/graphnode/imgtagger/releases/download/1.7.0/ImgTagger.1.7.0.zip" target="_blank"><i class="fa fa-download"></i>Download</a></li></ul></div></li><li style="background-image:url(assets/devlog.png)" class="item"><div class="text"><div class="title">Development Log Layout</div><div class="description">Experimental layout for a design log based on a Lost Garden's idea.</div><ul class="links"><li class="link"><a href="https://graphnode.com/devlog-layout/" target="_blank"><i class="fa fa-external-link"></i>View</a></li></ul></div></li><li style="background-image:url(assets/night.png)" class="item"><div class="text"><div class="title">Night</div><div class="description">Tiny application that turns off your laptop monitor by double clicking on the icon in the tray.</div><ul class="links"><li class="link"><a href="https://github.com/graphnode/night/releases/download/0.1/Night.0.1.zip" target="_blank"><i class="fa fa-download"></i>Download</a></li></ul></div></li></ul></main><footer><div class="span-container"><span>“Now I am become dev, the coder of worlds.” </span><span> <a href="mailto:dgomes@graphnode.com">dgomes@graphnode.com</a></span><span>Last Updated: 2016-01-22</span></div></footer><script>var t = document.getElementsByTagName('head')[0]; 
-var cb = function() {
-    ["//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.min.css", "//fonts.googleapis.com/css?family=Roboto:400,500,700", "//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css", "main.css"]
-    .forEach(function(u) { var l = document.createElement('link'); l.rel = 'stylesheet'; l.href = u; t.appendChild(l); });
-};
-var raf = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
-if (raf) raf(cb); else window.addEventListener('load', cb);
-var _umb = { require: { chrome: 45, safari: 7, edge: 11, firefox: 40, ie: 10, opera: 31 }, nonCritical: false };
-(function(u) {
-    var s = document.createElement('script'); s.async = true; s.src = u; t.appendChild(s);
-})('//updatemybrowser.org/umb.js');</script></body></html>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Graphnode</title>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous" />
+        <link rel="stylesheet" type="text/css" href="/styles/main.css">
+    </head>
+    <body>
+        <div class="container">
+            <h1 class="title"><span>Graphnode</span></h1>
+            <ul class="links">
+                <li class="link github">
+                    <a href="https://github.com/graphnode">
+                        <i class="fab fa-github-square"></i>
+                        <span>Github Profile</span>
+                    </a>
+                </li>
+                <li class="link twitter">
+                    <a href="https://twitter.com/graphnode">
+                        <i class="fab fa-twitter-square"></i>
+                        <span>Twitter Account</span>
+                    </a>
+                </li>
+                <li class="link email">
+                    <a href="mailto:dgomes@graphnode.com" alt="dgomes@graphnode.com" data-clipboard-text="dgomes@graphnode.com">
+                        <i class="fas fa-envelope-square"></i>
+                        <span>Email Contact</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <canvas class="canvas"></canvas>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+        <script>
+            new ClipboardJS('.email a');
+
+            var NUM_PARTICLES = 300,
+            MAX_SPEED = 0.8,
+            particles = [],
+            imageData,
+            pixels,
+
+            w = window.innerWidth, h = window.innerHeight,
+            mouse = null,
+
+            canvas = document.querySelector('.canvas'),
+            ctx = canvas.getContext('2d');
+
+            init();
+
+            function init() {
+                onResize();
+                window.addEventListener('resize', onResize);
+
+                document.addEventListener('mousemove', function (e) {
+                    mouse = { x: e.clientX, y: e.clientY };
+                }, false);
+
+                document.addEventListener('touchmove', function (e) {
+                    mouse = { x: e.changedTouches[0].clientX, y: e.changedTouches[0].clientY };
+                }, false);
+
+                document.addEventListener('touchend', function (e) {
+                    mouse = null;
+                }, false);
+
+                document.addEventListener('mouseout', function (e) {
+                    mouse = null;
+                }, false);
+
+                particles = [];
+
+                var p, x, y, velX, velY, r;
+
+                for(var i = 0; i < NUM_PARTICLES; i++) {
+                    x = randomRange(0, w);
+                    y = randomRange(0, h);
+                    r = randomRange(1, 3);
+
+                    velX = randomRange(-MAX_SPEED, MAX_SPEED);
+                    velY = randomRange(-MAX_SPEED, MAX_SPEED);
+
+                    p = new Particle(x, y, velX, velY, r);
+                    particles.push(p);
+                }
+
+                run();
+            }
+
+            function onResize() {
+                w = window.innerWidth; h = window.innerHeight;
+                canvas.setAttribute('width', w); canvas.setAttribute('height', h);
+            }
+
+            function run() {
+                
+                ctx.clearRect(0, 0, w, h);
+
+                var i = particles.length,
+                    distance,
+                    distanceMouse,
+                    q,
+                    p1,
+                    p2;
+
+
+                while (i--) {
+                    p1 = particles[i];
+                    p1.update();
+
+                    ctx.beginPath();
+                    ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+                    ctx.arc(p1.x, p1.y, p1.radius, 0, 2 * Math.PI, false);
+                    ctx.fill();
+                    ctx.closePath();
+
+                    if (mouse != null) {
+                        distanceMouse = p1.distanceTo(mouse);
+
+                        if (distanceMouse <= w * 0.25)
+                            connect(p1, mouse);
+                    }
+
+                    for (q = 0; q < particles.length; q++) {
+                        p2 = particles[q];
+                        distance = p2.distanceTo(p1);
+
+
+                        if (p2 !== p1 && distance <= w * 0.05) {
+                            connect(p1, p2);
+                        }
+                    }
+                }
+
+                window.requestAnimationFrame(run);
+            }
+
+            function connect(p1, p2, a) {
+                ctx.beginPath();
+                ctx.strokeStyle = 'rgba(255, 255, 255, ' + ( a || '0.2') + ')';
+
+                ctx.moveTo(p1.x, p1.y);
+                ctx.lineTo(p2.x, p2.y);
+                ctx.stroke();
+                ctx.closePath();
+            }
+
+            function Particle(x, y, velX, velY, r) {
+                this.x = x;
+                this.y = y;
+                this.velX = velX;
+                this.velY = velY;
+                this.radius = r;
+
+                this.update = function () {
+                    this.x += this.velX;
+                    this.y += this.velY;
+
+                    this.x = Math.round(this.x);
+                    this.y = Math.round(this.y);
+
+                    if (this.x <= 0 || this.x >= w) {
+                        this.velX = -this.velX;
+                    }
+
+                    if (this.y <= 0 || this.y >= h) {
+                        this.velY = -this.velY;
+                    }
+                };
+
+
+                this.distanceTo = function (p) {
+                    var dx = p.x - this.x,
+                        dy = p.y - this.y;
+
+                    return Math.sqrt(dx * dx + dy * dy);
+                };
+
+                this.getIndex = function () {
+                    return ((this.x | 0) + (this.y | 0) * w) * 4;
+                };
+            }
+
+            function randomRange(min, max, round) {
+                var rand = Math.random() * (max - min + 1) + min;
+                return round ? Math.floor(rand) : rand;
+            }
+        </script>
+    </body>
+</html>
